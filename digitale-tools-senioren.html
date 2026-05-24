@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitale Tools & Sociale Media – 60-65 jaar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --groen: #1a6b4a;
+    --groen-licht: #e8f5ee;
+    --groen-mid: #2d9b6a;
+    --rood: #c0392b;
+    --rood-licht: #fdf0ef;
+    --oranje: #e67e22;
+    --oranje-licht: #fef5ec;
+    --donker: #1c2b22;
+    --tekst: #2d3b35;
+    --tekst-licht: #5a6b63;
+    --achtergrond: #f5f7f5;
+    --wit: #ffffff;
+    --border: #d4e0d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--achtergrond);
+    color: var(--tekst);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--donker);
+    color: #fff;
+    padding: 80px 24px 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--groen-mid);
+    opacity: 0.12;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--oranje);
+    opacity: 0.10;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--groen-mid);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    max-width: 700px;
+    margin: 0 auto 20px;
+  }
+  .hero h1 span { color: #6cd6a3; }
+  .hero p {
+    font-size: 1.1rem;
+    color: #b8cfc4;
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #6cd6a3;
+    display: block;
+  }
+  .hero-stat .lab { font-size: 13px; color: #8ab09e; }
+
+  /* NAV */
+  nav {
+    background: var(--wit);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--tekst-licht);
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav ul li a:hover { color: var(--groen); border-color: var(--groen); }
+
+  /* SECTIONS */
+  section { padding: 72px 24px; }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-label.groen { color: var(--groen); }
+  .section-label.rood { color: var(--rood); }
+  .section-label.oranje { color: var(--oranje); }
+
+  .section-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .groen .dot { background: var(--groen); }
+  .rood .dot { background: var(--rood); }
+  .oranje .dot { background: var(--oranje); }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--donker);
+    margin-bottom: 12px;
+  }
+  .lead {
+    font-size: 1.05rem;
+    color: var(--tekst-licht);
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+
+  /* VOORDELEN CARDS */
+  #voordelen { background: var(--wit); }
+  .voordelen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .voordeel-card {
+    background: var(--groen-licht);
+    border: 1px solid #c2dfd0;
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .voordeel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,107,74,0.10);
+  }
+  .voordeel-icon {
+    width: 48px; height: 48px;
+    background: var(--groen);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+  .voordeel-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--donker);
+    margin-bottom: 8px;
+  }
+  .voordeel-card p { font-size: 15px; color: var(--tekst); line-height: 1.6; }
+
+  /* RISICO'S */
+  #risicos { background: var(--achtergrond); }
+  .risicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .risico-card {
+    background: var(--wit);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--rood);
+    border-radius: 0 12px 12px 0;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .risico-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e8c4c0;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 40px;
+  }
+  .risico-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--rood);
+    margin-bottom: 6px;
+  }
+  .risico-card p { font-size: 15px; color: var(--tekst); line-height: 1.6; }
+
+  /* GEVAREN DETAIL */
+  #gevaren { background: var(--wit); }
+  .gevaren-accordion { display: flex; flex-direction: column; gap: 12px; }
+  .gevaar-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .gevaar-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    background: var(--wit);
+    transition: background 0.15s;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .gevaar-header:hover { background: var(--achtergrond); }
+  .gevaar-header.open { background: var(--rood-licht); }
+  .gevaar-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--rood-licht);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .gevaar-header.open .gevaar-icon { background: #fad7d4; }
+  .gevaar-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--donker);
+  }
+  .gevaar-chevron {
+    font-size: 20px;
+    color: var(--tekst-licht);
+    transition: transform 0.25s;
+  }
+  .gevaar-header.open .gevaar-chevron { transform: rotate(180deg); }
+  .gevaar-body {
+    display: none;
+    padding: 0 24px 24px 80px;
+    font-size: 15px;
+    color: var(--tekst);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .gevaar-body.open { display: block; }
+  .gevaar-body ul { padding-left: 20px; margin-top: 8px; }
+  .gevaar-body ul li { margin-bottom: 6px; }
+
+  /* TIPS */
+  #tips { background: linear-gradient(135deg, #1c2b22 0%, #1a3d2b 100%); color: #fff; }
+  #tips h2 { color: #fff; }
+  #tips .lead { color: #8ab09e; }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .tip-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .tip-card:hover { background: rgba(255,255,255,0.10); }
+  .tip-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #6cd6a3;
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .tip-card p { font-size: 14px; color: #b8cfc4; line-height: 1.5; }
+
+  /* HULP */
+  #hulp { background: var(--achtergrond); }
+  .hulp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .hulp-card {
+    background: var(--wit);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .hulp-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--donker);
+  }
+  .hulp-card p { font-size: 14px; color: var(--tekst-licht); margin-bottom: 16px; }
+  .hulp-card a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--groen);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .hulp-card a:hover { background: #145a3c; }
+
+  /* FOOTER */
+  footer {
+    background: var(--donker);
+    color: #8ab09e;
+    text-align: center;
+    padding: 36px 24px;
+    font-size: 14px;
+  }
+  footer a { color: #6cd6a3; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 56px 20px 64px; }
+    .hero-stats { gap: 24px; }
+    section { padding: 52px 20px; }
+    .gevaar-body { padding-left: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">Eindwerk 2024–2025</div>
+    <h1>Digitaal verbonden<br><span>op jouw tempo</span></h1>
+    <p>Een gids voor 60–65-jarigen over digitale tools, sociale media, kansen én gevaren.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">4</span><span class="lab">Voordelen</span></div>
+      <div class="hero-stat"><span class="num">5</span><span class="lab">Risico's</span></div>
+      <div class="hero-stat"><span class="num">5</span><span class="lab">Veiligheidstips</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <ul>
+    <li><a href="#voordelen">Voordelen</a></li>
+    <li><a href="#risicos">Risico's</a></li>
+    <li><a href="#gevaren">Gevaren in detail</a></li>
+    <li><a href="#tips">Veilig online</a></li>
+    <li><a href="#hulp">Hulp nodig?</a></li>
+  </ul>
+</nav>
+
+<!-- VOORDELEN -->
+<section id="voordelen">
+  <div class="container">
+    <div class="section-label groen"><span class="dot"></span>Kansen</div>
+    <h2>Wat digitaal voor jou kan betekenen</h2>
+    <p class="lead">Digitale technologie biedt 60–65-jarigen heel wat voordelen — van sociale connectie tot meer zelfstandigheid in het dagelijkse leven.</p>
+    <div class="voordelen-grid">
+      <div class="voordeel-card">
+        <div class="voordeel-icon">🤝</div>
+        <h3>Sociale verbinding</h3>
+        <p>Blijf in contact met familie, vrienden en kennissen. Verminder gevoelens van eenzaamheid via videogesprekken, berichten en sociale media.</p>
+      </div>
+      <div class="voordeel-card">
+        <div class="voordeel-icon">🌐</div>
+        <h3>Toegang tot informatie</h3>
+        <p>Via internet krijg je sneller toegang tot gezondheidsinformatie, nieuws, overheidsdiensten en andere nuttige content.</p>
+      </div>
+      <div class="voordeel-card">
+        <div class="voordeel-icon">📱</div>
+        <h3>Meer zelfstandigheid</h3>
+        <p>Bankapps, gezondheidsapps en online afspraken zorgen ervoor dat je minder afhankelijk bent van anderen.</p>
+      </div>
+      <div class="voordeel-card">
+        <div class="voordeel-icon">🧠</div>
+        <h3>Mentale stimulatie</h3>
+        <p>Digitale technologie kan communicatie, geheugen en cognitieve vaardigheden ondersteunen en actief houden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISICO'S -->
+<section id="risicos">
+  <div class="container">
+    <div class="section-label rood"><span class="dot"></span>Aandachtspunten</div>
+    <h2>Risico's om rekening mee te houden</h2>
+    <p class="lead">Digitale technologie brengt ook uitdagingen met zich mee. Door ze te kennen, kan je ze beter vermijden.</p>
+    <div class="risicos-grid">
+      <div class="risico-card">
+        <div class="risico-num">01</div>
+        <div>
+          <h3>Phishing &amp; online fraude</h3>
+          <p>Nepmails of berichten proberen je persoonlijke gegevens, wachtwoorden en geld te stelen via misleidende links of valse websites.</p>
+        </div>
+      </div>
+      <div class="risico-card">
+        <div class="risico-num">02</div>
+        <div>
+          <h3>Privacyproblemen</h3>
+          <p>Persoonlijke informatie kan onbedoeld worden gedeeld of misbruikt door apps, websites of derden.</p>
+        </div>
+      </div>
+      <div class="risico-card">
+        <div class="risico-num">03</div>
+        <div>
+          <h3>Digitale stress</h3>
+          <p>Te veel informatie, moeilijke apps of snelle technologische veranderingen kunnen onzekerheid en stress veroorzaken.</p>
+        </div>
+      </div>
+      <div class="risico-card">
+        <div class="risico-num">04</div>
+        <div>
+          <h3>Nepnieuws &amp; misinformatie</h3>
+          <p>Niet alle informatie online is correct of betrouwbaar. Fake news kan leiden tot verkeerde beslissingen.</p>
+        </div>
+      </div>
+      <div class="risico-card">
+        <div class="risico-num">05</div>
+        <div>
+          <h3>Minder persoonlijk contact</h3>
+          <p>Te veel online communicatie kan echt sociaal contact verminderen en eenzaamheid paradoxaal vergroten.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEVAREN IN DETAIL -->
+<section id="gevaren">
+  <div class="container">
+    <div class="section-label rood"><span class="dot"></span>Dieper ingaan</div>
+    <h2>Gevaren in detail</h2>
+    <p class="lead">Klik op een onderwerp om meer te lezen over hoe je jezelf kunt beschermen.</p>
+    <div class="gevaren-accordion">
+
+      <div class="gevaar-item">
+        <button class="gevaar-header" onclick="toggleGevaar(this)">
+          <div class="gevaar-icon">🎣</div>
+          <span class="gevaar-title">Phishing herkennen</span>
+          <span class="gevaar-chevron">▾</span>
+        </button>
+        <div class="gevaar-body">
+          <p>Phishing is een techniek waarbij criminelen zich voordoen als een betrouwbare organisatie (bank, overheid, pakketdienst) om jouw gegevens te stelen.</p>
+          <ul>
+            <li>Let op vreemde e-mailadressen of domeinnamen (bijv. "belgacom-support.xyz")</li>
+            <li>Klik nooit op links in onverwachte mails — ga altijd rechtstreeks naar de website</li>
+            <li>Echte instanties vragen nooit je wachtwoord per mail of sms</li>
+            <li>Twijfel je? Bel de organisatie zelf op via het officiële nummer</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gevaar-item">
+        <button class="gevaar-header" onclick="toggleGevaar(this)">
+          <div class="gevaar-icon">🔒</div>
+          <span class="gevaar-title">Privacy beschermen</span>
+          <span class="gevaar-chevron">▾</span>
+        </button>
+        <div class="gevaar-body">
+          <p>Veel apps vragen toegang tot meer gegevens dan nodig. Bewust omgaan met privacy begint bij kleine keuzes.</p>
+          <ul>
+            <li>Controleer welke apps toegang hebben tot je locatie, camera of contacten</li>
+            <li>Gebruik sterke, unieke wachtwoorden per dienst</li>
+            <li>Deel nooit je volledige geboortedatum of adres op openbare profielen</li>
+            <li>Gebruik tweestapsverificatie waar mogelijk</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gevaar-item">
+        <button class="gevaar-header" onclick="toggleGevaar(this)">
+          <div class="gevaar-icon">📰</div>
+          <span class="gevaar-title">Nepnieuws onderscheiden</span>
+          <span class="gevaar-chevron">▾</span>
+        </button>
+        <div class="gevaar-body">
+          <p>Misinformatie verspreidt zich razendsnel via sociale media. Het herkennen ervan is een belangrijke digitale vaardigheid.</p>
+          <ul>
+            <li>Controleer de bron: is dit een betrouwbare nieuwssite?</li>
+            <li>Zoek hetzelfde nieuws op bij meerdere bronnen</li>
+            <li>Gebruik <a href="https://www.knack.be" target="_blank">factcheckers</a> zoals Knack of VRT NWS</li>
+            <li>Wees extra waakzaam voor emotioneel geladen of schokkende berichten</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gevaar-item">
+        <button class="gevaar-header" onclick="toggleGevaar(this)">
+          <div class="gevaar-icon">😰</div>
+          <span class="gevaar-title">Omgaan met digitale stress</span>
+          <span class="gevaar-chevron">▾</span>
+        </button>
+        <div class="gevaar-body">
+          <p>Technologie hoeft niet overweldigend te zijn. Een rustige aanpak helpt om alles stap voor stap te leren.</p>
+          <ul>
+            <li>Neem de tijd — er is geen haast om alles meteen te leren</li>
+            <li>Vraag hulp aan familie, vrienden of een Digipunt bij jou in de buurt</li>
+            <li>Schakel meldingen uit die je niet nodig hebt</li>
+            <li>Plan bewust offline tijd in je dag</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gevaar-item">
+        <button class="gevaar-header" onclick="toggleGevaar(this)">
+          <div class="gevaar-icon">💬</div>
+          <span class="gevaar-title">Online vs. echt contact</span>
+          <span class="gevaar-chevron">▾</span>
+        </button>
+        <div class="gevaar-body">
+          <p>Digitaal contact is een aanvulling, geen vervanging voor echte ontmoetingen. Bewust gebruik houdt het balans.</p>
+          <ul>
+            <li>Gebruik digitale tools om afspraken te plannen, niet om ze te vervangen</li>
+            <li>Sluit je aan bij een lokale cursus digitale vaardigheden voor sociaal contact én kennis</li>
+            <li>Zet je telefoon weg tijdens maaltijden en gezinsmoment</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="container">
+    <div class="section-label oranje" style="color:#6cd6a3;"><span class="dot" style="background:#6cd6a3;"></span>Gouden regels</div>
+    <h2>Veilig online – 5 gouden tips</h2>
+    <p class="lead">Deze vijf regels beschermen je in de meeste situaties online.</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <span class="tip-num">1</span>
+        <p>Klik <strong>nooit</strong> op onbekende links of bijlagen in mails of berichten.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-num">2</span>
+        <p>Deel <strong>nooit</strong> je wachtwoorden of persoonlijke gegevens via mail of sms.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-num">3</span>
+        <p>Controleer altijd de <strong>afzender</strong> van mails en berichten voor je reageert.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-num">4</span>
+        <p>Gebruik <strong>sterke wachtwoorden</strong> en verander ze regelmatig. Gebruik een wachtwoordmanager.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-num">5</span>
+        <p>Vraag <strong>hulp</strong> bij twijfel. Je hoeft het niet alleen te doen!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HULP -->
+<section id="hulp">
+  <div class="container">
+    <div class="section-label groen"><span class="dot"></span>Ondersteuning</div>
+    <h2>Hulp nodig?</h2>
+    <p class="lead">Er zijn verschillende plaatsen waar je terecht kunt voor ondersteuning en digitale hulp in je buurt of online.</p>
+    <div class="hulp-grid">
+      <div class="hulp-card">
+        <div style="font-size:2.5rem;margin-bottom:12px;">📍</div>
+        <h3>Digipunten</h3>
+        <p>Gratis digitale hulp in jouw buurt, begeleid door vrijwilligers en professionals.</p>
+        <a href="https://www.digipunt.be" target="_blank">Vind een Digipunt</a>
+      </div>
+      <div class="hulp-card">
+        <div style="font-size:2.5rem;margin-bottom:12px;">🏛️</div>
+        <h3>Lokale dienstencentra</h3>
+        <p>Dienstencentra bieden cursussen digitale vaardigheden aan voor senioren in jouw gemeente.</p>
+        <a href="https://www.socialedienstverlening.be" target="_blank">Meer info</a>
+      </div>
+      <div class="hulp-card">
+        <div style="font-size:2.5rem;margin-bottom:12px;">📚</div>
+        <h3>Mediawijs</h3>
+        <p>Kenniscentrum voor digitale en mediavaardigheden met tips, gidsen en cursussen.</p>
+        <a href="https://www.mediawijs.be" target="_blank">Naar Mediawijs</a>
+      </div>
+      <div class="hulp-card">
+        <div style="font-size:2.5rem;margin-bottom:12px;">❤️</div>
+        <h3>CM Gezondheidsfonds</h3>
+        <p>Het CM Gezondheidsfonds ondersteunt projecten rond digitale gezondheid en zelfredzaamheid.</p>
+        <a href="https://www.cm.be" target="_blank">Bezoek CM</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:8px;">Samen bouwen we aan een <strong style="color:#6cd6a3;">gezonde, veilige en digitale toekomst</strong>.</p>
+  <p>Meer veiligheidsinfo: <a href="https://www.safeonweb.be" target="_blank">safeonweb.be</a> &nbsp;·&nbsp; <a href="https://www.mediawijs.be" target="_blank">mediawijs.be</a></p>
+  <p style="margin-top:16px;opacity:0.5;font-size:13px;">Website gemaakt als eindwerk – 2024–2025</p>
+</footer>
+
+<script>
+function toggleGevaar(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.gevaar-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.gevaar-header').forEach(h => h.classList.remove('open'));
+  if (!isOpen) {
+    body.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+</script>
+
+</body>
+</html>
